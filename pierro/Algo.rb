@@ -9,11 +9,23 @@ class Algo
 	end
 
 	def averagePerStock()
-		@average = Array.new()
+		nbOrder = @map.orders.count
+		@total = Array.new(nbOrder, 0)
+		@average = Array.new(nbOrder, 0)
 		@map.orders.each do |order|
-			items = order.getItems
-
+			order.getItems.each do |type|
+				@total[type] += 1
+			end
 		end
+		i = 0
+		@total.each do |nbType|
+			@average[i] = nbType.to_f / nbOrder.to_f
+			i += 1
+		end
+		@average
+	end
+	def reorganizeAverage()
+		@average.each_with_index.sort.map &:last
 	end
 end
 

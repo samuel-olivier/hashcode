@@ -62,7 +62,7 @@ if __FILE__ == $0
 
 		# Calculus
 		algo = Algo.new map
-		p algo.averagePerStock.count
+		algo.averagePerStock
 
 		p "EOF" if lines.count
 	end
