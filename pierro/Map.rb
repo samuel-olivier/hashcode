@@ -15,6 +15,8 @@ class Map
 	def add(type, item)
 		if type == :warehouse
 			@warehouses << item
+		elsif type == :drone
+			@drones << item
 		end
 	end
 	def warehouses(index = nil)

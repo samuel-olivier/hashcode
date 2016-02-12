@@ -6,8 +6,7 @@ class Drone
 	def initialize(warehouseStart, maxPayload)
 		# start warehouse
 		@warehouseStart = warehouseStart
-		@row = warehouseStart.row
-		@column = warehouseStart.column
+		@row, @column = warehouseStart.getPosition
 
 		# ---
 		@busy = false

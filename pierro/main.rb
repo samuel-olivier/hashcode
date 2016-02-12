@@ -4,6 +4,7 @@ require_relative 'Map'
 require_relative 'ProductType'
 require_relative 'Warehouse'
 require_relative 'Order'
+require_relative 'Drone'
 
 if __FILE__ == $0
 
@@ -39,10 +40,12 @@ if __FILE__ == $0
 		nbWarehouse = lines.shift.first.to_i
 		while nbWarehouse > 0 do
 			row, column = lines.shift
-			map.add :warehouse, Warehouse.new(row, column)
+			warehouse = Warehouse.new(row, column)
+			map.add :warehouse, warehouse
 			lines.shift.each do |nbProduct|
-				map.warehouses(:last).add nbProduct
+				warehouse.add nbProduct
 			end
+			map.add :drone, Drone.new(warehouse, maxPayload.to_i)
 			nbWarehouse -= 1
 		end
 
@@ -58,7 +61,6 @@ if __FILE__ == $0
 		# p map.warehouses :first
 		# p orders
 		# p lines
-		# drones = Drone.new
 	end
 
 end

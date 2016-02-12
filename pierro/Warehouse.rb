@@ -23,6 +23,9 @@ class Warehouse
 		@stock.first.first if @stock.first
 	end
 
+	def getPosition()
+		[@row, @column]
+	end
 	def to_s()
 		"[" + @row.to_s + ", " + @column.to_s + "] : " + @stock.to_s
 	end
