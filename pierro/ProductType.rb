@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
 class ProductType
-	def initialize(weigh = 0)
+	def initialize(index = 0, weigh = 0)
+		@index = index
 		@weigh = weigh
 	end
 end

@@ -6,6 +6,8 @@ require_relative 'Warehouse'
 require_relative 'Order'
 require_relative 'Drone'
 
+require_relative 'Algo'
+
 if __FILE__ == $0
 
 	require 'optparse'
@@ -38,7 +40,7 @@ if __FILE__ == $0
 
 		# warehouses
 		nbWarehouse = lines.shift.first.to_i
-		while nbWarehouse > 0 do
+		(0..nbWarehouse).each do
 			row, column = lines.shift
 			warehouse = Warehouse.new(row, column)
 			map.add :warehouse, warehouse
@@ -46,21 +48,20 @@ if __FILE__ == $0
 				warehouse.add nbProduct
 			end
 			map.add :drone, Drone.new(warehouse, maxPayload.to_i)
-			nbWarehouse -= 1
 		end
 
 		# orders
 		nbOrder = lines.shift.first.to_i
 		orders = []
-		while nbOrder > 0 do
+		(0..nbOrder).each do
 			row, column = lines.shift
 			nbItem = lines.shift.first.to_i
 			orders << Order.new(row, column, lines.shift)
-			nbOrder -= 1
 		end
-		# p map.warehouses :first
-		# p orders
-		# p lines
+
+		p map.drones
+		# Calculus
+		algo = Algo.new map
 	end
 
 end

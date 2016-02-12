@@ -19,7 +19,7 @@ class Warehouse
 	end
 
 	def findProduct(type = nil)
-		@stock[type].first if type
+		@stock[type] if type
 		@stock.first.first if @stock.first
 	end
 

@@ -28,6 +28,7 @@ class Map
 			end
 			return @warehouses[index]
 		end
+		@warehouses
 	end
 	def drones(index = nil, busy = :no)
 		@drones[index] if index

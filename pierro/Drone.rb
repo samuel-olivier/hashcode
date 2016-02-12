@@ -10,7 +10,7 @@ class Drone
 
 		# ---
 		@busy = false
-		@warehouseRelate = warehouseStart
+		# @warehouseRelate = warehouseStart
 	end
 
 	def busy?()
