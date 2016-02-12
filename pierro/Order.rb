@@ -4,10 +4,7 @@ class Order
 	def initialize(row, column, items)
 		@row = row
 		@column = column
-		@items = []
-		items.each do |item|
-			@items << item.to_i
-		end
+		@items = items
 
 		# ---
 		@pending = false
@@ -15,6 +12,14 @@ class Order
 
 	def pending?()
 		@pending
+	end
+	def pending!(state = :toggle)
+		@pending != true if state == :toggle
+		@pending = state
+	end
+	def complete?()
+		true unless @items.count > 0
+		false
 	end
 
 	def getItems()

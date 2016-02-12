@@ -48,9 +48,18 @@ class Map
 	end
 	def drones(index = nil, busy = :no)
 		@drones[index] if index
+		@drones if busy == :indf
 		@drones.each do |drone|
-			drone if busy != :indf && drone.busy? == ((busy == :yes) ? true : false)
+			drone if drone.busy? == ((busy == :yes) ? true : false)
+		end if busy
+		@drones
+	end
+
+	def is_warehouse?(row, column)
+		@warehouses.each do |warehouse|
+			return true if warehouse.getPosition == [@row, @column]
 		end
+		false
 	end
 
 	def to_s()

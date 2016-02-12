@@ -9,18 +9,29 @@ class Algo
 	end
 
 	# bootstraps
-	def averagePerStock()
-		nbOrder = @map.orders.count
-		@total = Array.new(nbOrder, 0)
-		@average = Array.new(nbOrder, 0)
+	def sortSizeOrderedProduct()
+		productTypes = @map.productTypes
+		nbProduct = productTypes.count
+		weighs = []
 		@map.orders.each do |order|
 			order.getItems.each do |type|
-				@total[type] += 1
+				weighs << type.weigh
+			end
+		end
+		@sortedByWeight = weighs.each_with_index.sort.reverse.map &:last
+	end
+	def averagePerStock()
+		nbProduct = @map.productTypes.count
+		@total = Array.new(nbProduct, 0)
+		@average = Array.new(nbProduct, 0)
+		@map.orders.each do |order|
+			order.getItems.each do |type|
+				@total[type.index] += 1
 			end
 		end
 		i = 0
 		@total.each do |nbType|
-			@average[i] = nbType.to_f / nbOrder.to_f
+			@average[i] = nbType.to_f / nbProduct.to_f
 			i += 1
 		end
 		@average
@@ -30,9 +41,13 @@ class Algo
 	end
 
 	# maestros
-	def dronesWithAveragePayload()
-		# the purpose here is to take care of the big part of the orders first.
-		
+	def loadDronesWithAveragePayload()
+		# the purpose here is to take care of the big part of the orders first without considering orders as objects.
+
+		@map.drones(nil, :no).each do |drone|
+			p @map.productTypes[@indexedAverage.first], @total[@indexedAverage.first]
+			@total[@indexedAverage.first] -= 1
+		end
 	end
 end
 

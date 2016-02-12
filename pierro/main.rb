@@ -33,8 +33,10 @@ if __FILE__ == $0
 
 		# productTypes
 		nbProductType = lines.shift.first.to_i
+		i = 0
 		lines.shift.each do |weigh|
-			map.add :productType, ProductType.new(weigh)
+			map.add :productType, ProductType.new(i, weigh)
+			i += 1
 		end
 		raise "productTypes gone wrong" unless nbProductType == map.productTypes.count
 
@@ -56,16 +58,18 @@ if __FILE__ == $0
 		(1..nbOrder).each do
 			row, column = lines.shift
 			nbItem = lines.shift.first.to_i
-			map.add :order, Order.new(row, column, lines.shift)
+			map.add :order, Order.new(row, column, lines.shift.map{|t| map.productTypes[t.to_i]})
 		end
-		raise "orders goes wrong" unless nbOrder == map.orders.count
-
+		raise "orders gone wrong" unless nbOrder == map.orders.count
+# p map.orders
 		# Calculus
 		algo = Algo.new map
+		p algo.sortSizeOrderedProduct
 		algo.averagePerStock
-		p algo.reorganizeAverage
+		algo.reorganizeAverage
+		algo.loadDronesWithAveragePayload
 
-		p "EOF" if lines.count
+		# p "EOF" if lines.count
 	end
 
 end

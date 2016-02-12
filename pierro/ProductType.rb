@@ -5,6 +5,16 @@ class ProductType
 		@index = index
 		@weigh = weigh
 	end
+
+	def weigh()
+		@weigh
+	end
+	def index()
+		@index
+	end
+	def type()
+		@index
+	end
 end
 
 if __FILE__ == $0

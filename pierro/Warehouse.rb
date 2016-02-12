@@ -12,15 +12,15 @@ class Warehouse
 
 	def add(nbProduct, type = nil)
 		if type
-			@stock[type] += nbProduct
+			@stock[type] += nbProduct.to_i
 		else
-			@stock << nbProduct
+			@stock << nbProduct.to_i
 		end
 	end
 
 	def findProduct(type = nil)
 		@stock[type] if type
-		@stock.first.first if @stock.first
+		@stock.first if @stock.first
 	end
 
 	def getPosition()
