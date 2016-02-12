@@ -8,6 +8,7 @@ class Algo
 		@map = map
 	end
 
+	# bootstraps
 	def averagePerStock()
 		nbOrder = @map.orders.count
 		@total = Array.new(nbOrder, 0)
@@ -25,7 +26,13 @@ class Algo
 		@average
 	end
 	def reorganizeAverage()
-		@average.each_with_index.sort.map &:last
+		@indexedAverage = @average.each_with_index.sort.reverse.map &:last
+	end
+
+	# maestros
+	def dronesWithAveragePayload()
+		# the purpose here is to take care of the big part of the orders first.
+		
 	end
 end
 
