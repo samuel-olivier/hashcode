@@ -14,7 +14,7 @@ if __FILE__ == $0
 
 	options = {}
 	OptionParser.new do |opts|
-	  opts.banner = "Usage: main.rb [-i|--file FILENAME]"
+	  opts.banner = "Usage: " + $0 + " [-i|--file FILENAME]"
 
 	  opts.on("-i", "--file=FILENAME", "the input file") do |v|
 	    options[:inputfile] = v
