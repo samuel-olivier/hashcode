@@ -33,14 +33,14 @@ if __FILE__ == $0
 
 		# productTypes
 		nbProductType = lines.shift.first.to_i
-		productTypes = []
 		lines.shift.each do |weigh|
-			productTypes << ProductType.new(weigh)
+			map.add :productType, ProductType.new(weigh)
 		end
+		raise "productTypes gone wrong" unless nbProductType == map.productTypes.count
 
 		# warehouses
 		nbWarehouse = lines.shift.first.to_i
-		(0..nbWarehouse).each do
+		(1..nbWarehouse).each do
 			row, column = lines.shift
 			warehouse = Warehouse.new(row, column)
 			map.add :warehouse, warehouse
@@ -49,19 +49,22 @@ if __FILE__ == $0
 			end
 			map.add :drone, Drone.new(warehouse, maxPayload.to_i)
 		end
+		raise "warehouses gone wrong" unless nbWarehouse == map.warehouses.count
 
 		# orders
 		nbOrder = lines.shift.first.to_i
-		orders = []
-		(0..nbOrder).each do
+		(1..nbOrder).each do
 			row, column = lines.shift
 			nbItem = lines.shift.first.to_i
-			orders << Order.new(row, column, lines.shift)
+			map.add :order, Order.new(row, column, lines.shift)
 		end
+		raise "orders goes wrong" unless nbOrder == map.orders.count
 
-		p map.drones
 		# Calculus
 		algo = Algo.new map
+		p algo.averagePerStock.count
+
+		p "EOF" if lines.count
 	end
 
 end

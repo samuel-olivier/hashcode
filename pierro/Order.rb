@@ -5,6 +5,17 @@ class Order
 		@row = row
 		@column = column
 		@items = items
+
+		# ---
+		@pending = false
+	end
+
+	def pending?()
+		@pending
+	end
+
+	def getItems()
+		@items
 	end
 end
 

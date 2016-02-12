@@ -9,7 +9,11 @@ class Algo
 	end
 
 	def averagePerStock()
-		
+		@average = Array.new()
+		@map.orders.each do |order|
+			items = order.getItems
+
+		end
 	end
 end
 
